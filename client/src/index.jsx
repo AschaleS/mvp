@@ -1,15 +1,38 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import Search from './components/Search.jsx';
+import GetZip from './components/GetZipCodes.jsx';
+import Transport from './components/TransportType.jsx';
 
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      result: ''
+      Recommended_Transport: ''
     };
+  }
+
+
+
+  getDistance(origin, destination) {
+    let url = 'http://localhost:4600/distance';
+    var request = $.ajax({
+      url: url,
+      method: 'POST',
+      dataType: "json",
+      data: JSON.stringify({
+        origin: origin,
+        destination: destination
+      }),
+      contentType: "application/json",
+      success: function(){
+        console.log('success');
+      }
+    });
+
+      console.log(`${origin} and ${destination} were submitted`);
+
   }
 
   render() {
@@ -17,7 +40,8 @@ class App extends React.Component {
       return (
       <div>
         <h1>Suggest A Transportation</h1>
-        <Search onSearch={this.search} />
+        <GetZip onGetDistance={this.getDistance.bind(this)} />
+        <Transport onSearch={this.state.Recommended_Transport} />
 
       </div>
       )
