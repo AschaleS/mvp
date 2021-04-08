@@ -14,8 +14,7 @@ let getDistanceBetweenZipCodes = (origin, destination, callback) => {
     if (err) {
       console.log(err);
     } else {
-      console.log("this is the result from the API:", body);
-
+      // console.log("this is the result from the API:", body);
      callback(body);
     };
   });

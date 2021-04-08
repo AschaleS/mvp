@@ -22,7 +22,7 @@ class GetZip extends React.Component {
   }
 
   getZip() {
-    this.props.onGetDistance(this.state.origin, this.state.destination);
+    this.props.onSendZipCode(this.state.origin, this.state.destination);
   }
 
   render() {
@@ -38,7 +38,7 @@ class GetZip extends React.Component {
           <input value={this.state.destination} onChange={this.onDestinationChange.bind(this)}/>
         </div>
         <div>
-        <button onClick={this.getZip.bind(this)}> Recommend A Transportation </button>
+        <button onClick={this.getZip.bind(this)}> Recommend A Transport </button>
         </div>
     </div>
 

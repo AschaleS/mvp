@@ -9,13 +9,27 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      Recommended_Transport: ''
+      recommended_transport: '',
     };
   }
 
+  componentDidMount() {
 
+  }
 
-  getDistance(origin, destination) {
+  getRecommendedTransportation(distance, origin, destination) {
+    if (distance <= 500) {
+      this.setState({
+        recommended_transport: `The recommended transportation between ${origin} and ${destination} is Driving`
+      });
+    } else if (distance > 500) {
+      this.setState({
+        recommended_transport: `The recommended transportation between ${origin} and ${destination} is Flying`
+      });
+    };
+  }
+
+  sendZipCode(origin, destination) {
     let url = 'http://localhost:4600/distance';
     var request = $.ajax({
       url: url,
@@ -26,26 +40,41 @@ class App extends React.Component {
         destination: destination
       }),
       contentType: "application/json",
-      success: function(){
-        console.log('success');
-      }
-    });
+      success: function (result) {
+        console.log('result: ', result)
+        if(result.error_code) {
+          this.setState({
+            recommended_transport: `Please enter valid zip codes`
+          });
+        } else {
+          this.getRecommendedTransportation(result.distance, origin, destination);
+        }
+      }.bind(this),
+      error: function(error) {
+        this.setState({
+          recommended_transport: `Please enter valid zip codes`
+        });
+      }.bind(this)
 
-      console.log(`${origin} and ${destination} were submitted`);
+    });
+    console.log(`${origin} and ${destination} were submitted`);
 
   }
-
   render() {
-
+    if (this.state.recommended_transport === '') {
+      return (<div>
+        <h1>Recommend Transportation</h1>
+        <GetZip onSendZipCode={this.sendZipCode.bind(this)} />
+      </div>)
+    } else {
       return (
-      <div>
-        <h1>Suggest A Transportation</h1>
-        <GetZip onGetDistance={this.getDistance.bind(this)} />
-        <Transport onSearch={this.state.Recommended_Transport} />
-
-      </div>
+        <div>
+          <h1>Recommend Transportation</h1>
+          <GetZip onSendZipCode={this.sendZipCode.bind(this)} />
+          <Transport recommended_transport={this.state.recommended_transport} />
+        </div>
       )
-
+    }
   }
 }
 

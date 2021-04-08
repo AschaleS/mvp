@@ -12,9 +12,9 @@ app.post('/distance', function (req, res) {
   let origin = req.body.origin;
   let destination = req.body.destination;
   getDistanceBetweenZipCodes(origin, destination, (result) => {
-    console.log('Thisis the result from the API call in the server', result);
-      res.status(201).send(result);
-      res.end();
+    //console.log('This is the result from the API call in the server', result);
+    res.status(200).send(result);
+    res.end();
   });
 });
 
