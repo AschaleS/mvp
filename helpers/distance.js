@@ -9,7 +9,6 @@ let getDistanceBetweenZipCodes = (origin, destination, callback) => {
   let options = {
     uri: url,
   };
-
   request.get(options, (err, res, body) => {
     if (err) {
       console.log(err);

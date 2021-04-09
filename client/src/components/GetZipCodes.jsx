@@ -13,6 +13,7 @@ class GetZip extends React.Component {
     this.setState({
       origin: e.target.value
     })
+
   }
 
   onDestinationChange (e) {
@@ -28,17 +29,17 @@ class GetZip extends React.Component {
   render() {
     return (
       <div>
-      <h4>Enter ZiP Codes Below</h4>
-        <div className="box1">
+      <h4 style={{color: "black", padding: "3px"}}>Please enter origion and destination ZiP Codes below</h4>
+        <div style={{color: "black", float: "left", padding: "3px"}}>
           <label>Origion Zip Code</label>
           <input value={this.state.origin} onChange={this.onOriginChange.bind(this)}/>
         </div>
-        <div className="box2">
+        <div style={{color: "black", float: "center", padding: "3px"}}>
         <label>Destination Zip Code</label>
           <input value={this.state.destination} onChange={this.onDestinationChange.bind(this)}/>
         </div>
         <div>
-        <button onClick={this.getZip.bind(this)}> Recommend A Transport </button>
+        <button onClick={this.getZip.bind(this)} style={{color: "navy", padding: "5px", fontWeight:"bold"}}> Recommend A Transport </button>
         </div>
     </div>
 
