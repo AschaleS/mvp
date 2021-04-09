@@ -18,21 +18,21 @@ class App extends React.Component {
   }
 
   getRecommendedTransportation(distance, origin, destination) {
-    if (distance <= 5) {
+    if (distance <= 4) {
       this.setState({
-        recommended_transport: `You can walk from ${origin} to ${destination}. Walking is good for your health!`
+        recommended_transport: `Walking is recommended from ${origin} to ${destination}. Walking is good for your health! Average walking time is below ${(distance*12).toFixed(0)} minutes.`
       });
-    } else if (distance > 5 && distance <= 50) {
+    } else if (distance > 4 && distance <= 50) {
       this.setState({
-        recommended_transport: `The recommended mode of transportation between ${origin} and ${destination} is taking pubic transportation. You can also take a taxi or drive if you have a car`
+        recommended_transport: `The recommended mode of transportation between ${origin} and ${destination} is pubic transportation. Average travel time is about ${(distance*0.92).toFixed(0)} minutes.`
       });
-    } else if (distance > 50 && distance < 500) {
+    } else if (distance > 50 && distance <= 500) {
       this.setState({
-        recommended_transport: `The recommended mode of transportation between ${origin} and ${destination} is Driving. You can find nearby car rental places`
+        recommended_transport: `The recommended mode of transportation between ${origin} and ${destination} is Driving. Average driving time is about ${((distance*0.92)/60).toFixed(2)} hours.`
       });
-    } else if (distance >= 500) {
+    } else {
       this.setState({
-        recommended_transport: `The recommended mode of transportation between ${origin} and ${destination} is Flying`
+        recommended_transport: `The recommended mode of transportation between ${origin} and ${destination} is Flying! Average flight time is ${((distance*0.15)/60).toFixed(2)} hours.`
       });
     };
   }
@@ -71,15 +71,19 @@ class App extends React.Component {
   render() {
     if (this.state.recommended_transport === '') {
       return (<div style={{color: "#6200FF", padding: "25px", fontWeight:"bold", background: "#81C784", height: "100vh"}}>
+        <div style={{ margin: "auto", width: "50%", padding: "10px"}}>
         <h2 style={{color: "black"}}>Recommend Transportation</h2>
         <GetZip onSendZipCode={this.sendZipCode.bind(this)} />
+        </div>
       </div>)
     } else {
       return (
-        <div style={{color: "#6200FF", padding: "25px", fontWeight:"bold", background: "#81C784", height: "100vh"}}>
-          <h2 style={{color: "black"}}>Recommend Transportation</h2>
-          <GetZip onSendZipCode={this.sendZipCode.bind(this)} />
+        <div style={{color: "#6200FF", padding: "25px", fontWeight:"bold", background: "#81C784", height: "100vh", backgroundImage:"background"}}>
+           <div style={{ margin: "auto", width: "50%", padding: "10px"}}>
+          <h2 style={{color: "black"}}>Recommended Transportation</h2>
+          {/* <GetZip onSendZipCode={this.sendZipCode.bind(this)} /> */}
           <Transport  recommended_transport={this.state.recommended_transport} />
+          </div>
         </div>
       )
     }

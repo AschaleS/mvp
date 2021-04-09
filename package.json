@@ -1,5 +1,5 @@
 {
-  "name": "suggest_a_transportation",
+  "name": "recommend_a_transportation",
   "version": "1.0.0",
   "description": "",
   "main": "webpack.config.js",
