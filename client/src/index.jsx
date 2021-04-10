@@ -13,26 +13,24 @@ class App extends React.Component {
     };
   }
 
-  componentDidMount() {
-
-  }
 
   getRecommendedTransportation(distance, origin, destination) {
+    const prefixText = "The recommended mode of transportation between";
     if (distance <= 4) {
       this.setState({
-        recommended_transport: `Walking is recommended from ${origin} to ${destination}. Walking is good for your health! Average walking time is below ${(distance*12).toFixed(0)} minutes.`
+        recommended_transport: `Walking is recommended from ${origin} to ${destination}. Walking is good for your health! Average walking time is around ${(distance*12).toFixed(0)} minutes.`
       });
     } else if (distance > 4 && distance <= 50) {
       this.setState({
-        recommended_transport: `The recommended mode of transportation between ${origin} and ${destination} is pubic transportation. Average travel time is about ${(distance*0.92).toFixed(0)} minutes.`
+        recommended_transport: `${prefixText} ${origin} and ${destination} is pubic transport. Average travel time is ${(distance*0.92).toFixed(0)} minutes.`
       });
     } else if (distance > 50 && distance <= 500) {
       this.setState({
-        recommended_transport: `The recommended mode of transportation between ${origin} and ${destination} is Driving. Average driving time is about ${((distance*0.92)/60).toFixed(2)} hours.`
+        recommended_transport: `${prefixText} ${origin} and ${destination} is Driving. Average driving time is about ${((distance*0.92)/60).toFixed(2)} hours.`
       });
     } else {
       this.setState({
-        recommended_transport: `The recommended mode of transportation between ${origin} and ${destination} is Flying! Average flight time is ${((distance*0.15)/60).toFixed(2)} hours.`
+        recommended_transport: `${prefixText} ${origin} and ${destination} is Flying! Average flight time is ${((distance*0.15)/60).toFixed(2)} hours.`
       });
     };
   }
