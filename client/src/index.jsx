@@ -13,6 +13,9 @@ class App extends React.Component {
     };
   }
 
+  componentDidMount() {
+
+  }
 
   getRecommendedTransportation(distance, origin, destination) {
     const prefixText = "The recommended mode of transportation between";
